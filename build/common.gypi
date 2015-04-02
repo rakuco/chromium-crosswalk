@@ -597,6 +597,9 @@
       # Enable FTP support by default.
       'disable_ftp_support%': 0,
 
+      # Enable web audio hrtf by default.
+      'disable_webaudio_hrtf%': 0,
+
       # Do not use the platform ICU alternatives by default.
       'use_platform_icu_alternatives%': 0,
 
@@ -1230,6 +1233,7 @@
     'enable_captive_portal_detection%': '<(enable_captive_portal_detection)',
     'disable_file_support%': '<(disable_file_support)',
     'disable_ftp_support%': '<(disable_ftp_support)',
+    'disable_webaudio_hrtf%': '<(disable_webaudio_hrtf)',
     'use_platform_icu_alternatives%': '<(use_platform_icu_alternatives)',
     'disable_brotli_filter%': '<(disable_brotli_filter)',
     'enable_task_manager%': '<(enable_task_manager)',
@@ -2168,6 +2172,9 @@
       }],
       ['use_concatenated_impulse_responses==1', {
         'grit_defines': ['-D', 'use_concatenated_impulse_responses'],
+      }],
+      ['disable_webaudio_hrtf==1', {
+        'grit_defines': ['-D', 'disable_webaudio_hrtf'],
       }],
       ['enable_media_router==1', {
         'grit_defines': ['-D', 'enable_media_router'],
