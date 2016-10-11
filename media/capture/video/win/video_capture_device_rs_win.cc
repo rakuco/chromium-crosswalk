@@ -11,6 +11,7 @@
 #include "base/strings/string_number_conversions.h"
 #include "base/strings/sys_string_conversions.h"
 #include "base/strings/utf_string_conversions.h"
+#include "media/base/timestamp_constants.h"
 #include "third_party/libpxc/include/pxcimage.h"
 
 namespace media {
@@ -328,10 +329,16 @@ bool VideoCaptureDeviceRSWin::OnNewSample(PXCCapture::Sample* sample) {
       return false;
     }
 
+    if (first_ref_time_.is_null())
+        first_ref_time_ = base::TimeTicks::Now();
+
+    const base::TimeTicks now = base::TimeTicks::Now();
+    const base::TimeDelta timestamp = now - first_ref_time_;
+
     client_->OnIncomingCapturedData(
         static_cast<uint8_t*> (data.planes[0]),
         capture_format_.ImageAllocationSize(),
-        capture_format_, 0, base::TimeTicks::Now());
+        capture_format_, 0, now, timestamp);
 
     image->ReleaseAccess(&data);
   }

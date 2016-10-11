@@ -148,7 +148,7 @@ component("capture") {
     configs += [ "//build/config/compiler:no_size_t_to_int_warning" ]
 
     if (use_rssdk) {
-      defines = [ "USE_RSSDK" ]
+      defines += [ "USE_RSSDK" ]
       deps += [ "//third_party/libpxc" ]
       sources += [
         "video/win/video_capture_device_rs_win.cc",

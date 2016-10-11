@@ -65,6 +65,8 @@ class MEDIA_EXPORT VideoCaptureDeviceRSWin : public base::NonThreadSafe,
   ProfileList profiles_;
   std::unique_ptr<SenseManagerHandler> sense_manager_handler_;
 
+  base::TimeTicks first_ref_time_;
+
   base::Lock lock_;  // Used to guard the below variables.
   std::unique_ptr<VideoCaptureDevice::Client> client_;
   VideoCaptureFormat capture_format_;
